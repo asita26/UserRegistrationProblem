@@ -7,7 +7,7 @@ public class UserRegistration {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Validate First Name
+        // Validating First Name
         System.out.println("Enter your first name: ");
         String firstName = scanner.nextLine();
 
@@ -17,7 +17,7 @@ public class UserRegistration {
             System.out.println("Invalid first name. Please make sure it starts with a capital letter and has a minimum of 3 characters.");
         }
 
-        // Validate Last Name
+        // Validating Last Name
         System.out.println("Enter your last name: ");
         String lastName = scanner.nextLine();
 
@@ -27,28 +27,34 @@ public class UserRegistration {
             System.out.println("Invalid last name. Please make sure it starts with a capital letter and has a minimum of 3 characters.");
         }
 
+        // Validating Email
+        System.out.println("Enter your email address: ");
+        String email = scanner.nextLine();
+
+        if (isValidEmail(email)) {
+            System.out.println("Valid email address: " + email);
+        } else {
+            System.out.println("Invalid email address. Please make sure it follows the correct format.");
+        }
+
         scanner.close();
     }
 
     private static boolean isValidFirstName(String firstName) {
         // Defining the regex pattern for a valid first name
         String regex = "^[A-Z][a-zA-Z]{2,}$";
-
-        // Compiling the pattern
-        Pattern pattern = Pattern.compile(regex);
-
-        // Creating a matcher with the input string
-        Matcher matcher = pattern.matcher(firstName);
-
-        // Returning true if the matcher finds a match, indicating a valid first name
-        return matcher.matches();
+        return Pattern.matches(regex, firstName);
     }
 
     private static boolean isValidLastName(String lastName) {
+        // Defining the regex pattern for a valid last name
         String regex = "^[A-Z][a-zA-Z]{2,}$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(lastName);
-        return matcher.matches();
+        return Pattern.matches(regex, lastName);
+    }
+
+    private static boolean isValidEmail(String email) {
+        // Defining the regex pattern for a valid email address
+        String regex = "^[a-zA-Z0-9]+([._%+-]*[a-zA-Z0-9]+)*@[a-zA-Z]+\\.[a-zA-Z]{2,}(\\.[a-zA-Z]{2,})*$";
+        return Pattern.matches(regex, email);
     }
 }
-
